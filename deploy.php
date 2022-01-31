@@ -4,7 +4,7 @@ namespace Deployer;
 require 'recipe/common.php';
 
 // Project name
-set('application', 'ci_deployerphp_demo');
+set('application', 'deployerphp_ci_demo');
 
 // Default staging
 set('default_stage', 'staging');
@@ -51,7 +51,7 @@ add('writable_dirs', [
 host('home718553090.1and1-data.host')
     ->user('u91992593')
     ->stage('staging')
-    ->set('deploy_path', '~/dep_playground');
+    ->set('deploy_path', '~/{{application}}');
 
 // Tasks
 
