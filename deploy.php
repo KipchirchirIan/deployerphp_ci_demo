@@ -22,23 +22,23 @@ set('writable_mode', 'chmod');
 set('repository', 'git@github.com:KipchirchirIan/deployerphp_ci_demo.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true);
+set('git_tty', true); 
 
-// Shared files/dirs between deploys
-add('shared_files', [
+// Shared files/dirs between deploys 
+set('shared_files', [
     '.htaccess',
     '.env',
     'public/.htaccess'
 ]);
-add('shared_dirs', [
+set('shared_dirs', [
     'writable/cache',
     'writable/logs',
     'writable/session',
     'writable/uploads',
 ]);
 
-// Writable dirs by web server
-add('writable_dirs', [
+// Writable dirs by web server 
+set('writable_dirs', [
     'writable/cache',
     'writable/logs',
     'writable/session',
@@ -52,12 +52,26 @@ host('home718553090.1and1-data.host')
     ->user('u91992593')
     ->stage('staging')
     ->set('deploy_path', '~/{{application}}');
+    
 
 // Tasks
 
-task('build', function () {
-    run('cd {{release_path}} && build');
-});
+desc('Deploy your project');
+task('deploy', [
+    'deploy:info',
+    'deploy:prepare',
+    'deploy:lock',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:shared',
+    'deploy:writable',
+    'deploy:vendors',
+    'deploy:clear_paths',
+    'deploy:symlink',
+    'deploy:unlock',
+    'cleanup',
+    'success'
+]);
 
-// [Optional] if deploy fails automatically unlock.
+// [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
