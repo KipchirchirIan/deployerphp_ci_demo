@@ -28,7 +28,7 @@
 			text-rendering: optimizeLegibility;
 		}
 		header {
-			background-color: rgba(247, 248, 249, 1);
+			background-color: rgb(64, 255, 118);
 			padding: .4rem 0 0;
 		}
 		.menu {
